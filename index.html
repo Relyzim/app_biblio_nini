@@ -39,10 +39,32 @@
             --r: 12px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        html[data-theme="dark"] {
+            --ink: #ece3d4;
+            --ink2: #c3b7a2;
+            --ink3: #8f8471;
+            --bg: #14110c;
+            --bg2: #1e1a13;
+            --bg3: #2a241a;
+            --cream: #1b1710;
+            --gold: #d9a94a;
+            --gold2: #eac578;
+            --read: #56b98a;
+            --read-bg: #123026;
+            --pal: #b48ad6;
+            --pal-bg: #29203a;
+            --wish: #e57368;
+            --wish-bg: #3a2020;
+            --reading: #5a9bf0;
+            --reading-bg: #16233a;
+            --border: rgba(230, 210, 170, 0.14);
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        html[data-theme="dark"] body {
+            background: var(--bg);
+        }
         }
 
         body {
@@ -972,15 +994,19 @@
             display: flex;
             gap: 2px;
             cursor: pointer;
+            font-size: 22px;
         }
 
         .star {
-            font-size: 18px;
+            font-size: 22px;
+            color: var(--gold);
             transition: transform 0.1s;
+            user-select: none;
+            line-height: 1;
         }
 
         .star:hover {
-            transform: scale(1.2);
+            transform: scale(1.15);
         }
 
         /* ── RESPONSIVE ── */
@@ -1032,6 +1058,7 @@
                 transform: rotate(360deg);
             }
         }
+
         /* ════════ AJOUTS v2 ════════ */
         :root {
             --reading: #1f6feb;
@@ -1184,7 +1211,7 @@
             margin-top: 6px;
         }
 
-        .prog-mini > i {
+        .prog-mini>i {
             display: block;
             height: 100%;
             background: var(--reading);
@@ -1395,22 +1422,46 @@
         }
 
         /* ════════ MOBILE ════════ */
-        .only-mobile { display: none; }
-        .btn-icon-only { display: none; }
-        .mobile-nav { display: none; }
-        .tools-menu { display: none; }
+        .only-mobile {
+            display: none;
+        }
+
+        .btn-icon-only {
+            display: none;
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        .tools-menu {
+            display: none;
+        }
 
         @media (max-width: 960px) {
-            .stats-grid { grid-template-columns: 1fr 1fr; }
-            .calc-grid { grid-template-columns: 1fr; }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 760px) {
-            /* La barre latérale laisse place à la nav basse */
-            .sidebar { display: none; }
-            .only-mobile { display: inline-flex; }
 
-            .main { width: 100%; }
+            /* La barre latérale laisse place à la nav basse */
+            .sidebar {
+                display: none;
+            }
+
+            .only-mobile {
+                display: inline-flex;
+            }
+
+            .main {
+                width: 100%;
+            }
 
             /* Barre du haut compacte : titre + recherche sur une ligne, actions dessous */
             .topbar {
@@ -1419,37 +1470,95 @@
                 gap: 10px;
                 row-gap: 10px;
             }
-            .topbar-title { font-size: 18px; order: 1; flex: 1 1 auto; }
-            .search-wrap { order: 3; flex: 1 1 100%; }
-            .search-wrap input { width: 100%; font-size: 16px; }
-            .topbar .btn { order: 2; padding: 10px 12px; }
-            .btn-label { display: none; }
-            .btn-icon-only { display: inline; }
+
+            .topbar-title {
+                font-size: 18px;
+                order: 1;
+                flex: 1 1 auto;
+            }
+
+            .search-wrap {
+                order: 3;
+                flex: 1 1 100%;
+            }
+
+            .search-wrap input {
+                width: 100%;
+                font-size: 16px;
+            }
+
+            .topbar .btn {
+                order: 2;
+                padding: 10px 12px;
+            }
+
+            .btn-label {
+                display: none;
+            }
+
+            .btn-icon-only {
+                display: inline;
+            }
+
             /* Le bouton scanner garde son libellé masqué mais reste tapable */
-            .topbar .btn-ghost[title="Scanner un code-barres"] { font-size: 16px; }
+            .topbar .btn-ghost[title="Scanner un code-barres"] {
+                font-size: 16px;
+            }
 
-            .content { padding: 16px 14px calc(76px + env(safe-area-inset-bottom)); }
+            .content {
+                padding: 16px 14px calc(76px + env(safe-area-inset-bottom));
+            }
 
-            .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-            .stat-card { padding: 14px; }
-            .stat-card-val { font-size: 26px; }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 14px;
+            }
+
+            .stat-card-val {
+                font-size: 26px;
+            }
 
             .books-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
                 gap: 12px;
             }
 
-            .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .toolbar { width: 100%; }
-            .filter-row { flex-wrap: wrap; }
-            .mini-select { flex: 1 1 100%; }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .toolbar {
+                width: 100%;
+            }
+
+            .filter-row {
+                flex-wrap: wrap;
+            }
+
+            .mini-select {
+                flex: 1 1 100%;
+            }
 
             /* Champs : 16px évite le zoom automatique iOS */
-            .form-input, .form-select, .form-textarea,
-            #isbn-input, #title-input { font-size: 16px; }
+            .form-input,
+            .form-select,
+            .form-textarea,
+            #isbn-input,
+            #title-input {
+                font-size: 16px;
+            }
 
             /* Modales plein écran, ancrées en bas */
-            .overlay { align-items: flex-end; }
+            .overlay {
+                align-items: flex-end;
+            }
+
             .modal {
                 width: 100%;
                 max-width: 100%;
@@ -1457,24 +1566,70 @@
                 border-radius: 18px 18px 0 0;
                 padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
             }
-            #scan-overlay .modal { width: 100% !important; }
-            .form-row { grid-template-columns: 1fr; }
-            .modal-footer { position: sticky; bottom: 0; background: var(--bg); padding-top: 12px; }
-            .modal-footer .btn { flex: 1; padding: 13px; }
-            .status-tab { padding: 11px 6px; font-size: 12px; }
-            .emoji-opt { width: 44px; height: 44px; }
-            .cover-editor { flex-wrap: wrap; }
+
+            #scan-overlay .modal {
+                width: 100% !important;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-footer {
+                position: sticky;
+                bottom: 0;
+                background: var(--bg);
+                padding-top: 12px;
+            }
+
+            .modal-footer .btn {
+                flex: 1;
+                padding: 13px;
+            }
+
+            .status-tab {
+                padding: 11px 6px;
+                font-size: 12px;
+            }
+
+            .emoji-opt {
+                width: 44px;
+                height: 44px;
+            }
+
+            .cover-editor {
+                flex-wrap: wrap;
+            }
 
             /* Cibles tactiles plus généreuses */
-            .icon-btn { min-width: 40px; min-height: 40px; }
-            .book-actions { opacity: 1; }
-            .scan-tab { padding: 11px 4px; font-size: 12px; }
-            .scan-frame { max-height: none; aspect-ratio: 3/4; }
+            .icon-btn {
+                min-width: 40px;
+                min-height: 40px;
+            }
+
+            .book-actions {
+                opacity: 1;
+            }
+
+            .scan-tab {
+                padding: 11px 4px;
+                font-size: 12px;
+            }
+
+            .scan-frame {
+                max-height: none;
+                aspect-ratio: 3/4;
+            }
         }
 
         @media (max-width: 400px) {
-            .mnav-lbl { font-size: 9px; }
-            .stat-card-val { font-size: 22px; }
+            .mnav-lbl {
+                font-size: 9px;
+            }
+
+            .stat-card-val {
+                font-size: 22px;
+            }
         }
 
         /* ── Barre de navigation basse ── */
@@ -1487,10 +1642,11 @@
                 right: 0;
                 z-index: 40;
                 background: var(--ink);
-                border-top: 1px solid rgba(255,255,255,.08);
+                border-top: 1px solid rgba(255, 255, 255, .08);
                 padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
-                box-shadow: 0 -4px 20px rgba(0,0,0,.12);
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, .12);
             }
+
             .mnav-item {
                 flex: 1;
                 background: none;
@@ -1506,9 +1662,21 @@
                 position: relative;
                 transition: color .15s;
             }
-            .mnav-item.active { color: var(--gold2); }
-            .mnav-ico { font-size: 19px; line-height: 1; }
-            .mnav-lbl { font-size: 10px; letter-spacing: .01em; }
+
+            .mnav-item.active {
+                color: var(--gold2);
+            }
+
+            .mnav-ico {
+                font-size: 19px;
+                line-height: 1;
+            }
+
+            .mnav-lbl {
+                font-size: 10px;
+                letter-spacing: .01em;
+            }
+
             .mnav-badge {
                 position: absolute;
                 top: 2px;
@@ -1526,7 +1694,10 @@
                 align-items: center;
                 justify-content: center;
             }
-            .mnav-badge.show { display: flex; }
+
+            .mnav-badge.show {
+                display: flex;
+            }
         }
 
         /* ── Menu outils (mobile) ── */
@@ -1535,8 +1706,9 @@
             position: fixed;
             inset: 0;
             z-index: 60;
-            background: rgba(20,14,4,.45);
+            background: rgba(20, 14, 4, .45);
         }
+
         .tools-menu-panel {
             position: absolute;
             top: 64px;
@@ -1553,6 +1725,7 @@
             box-shadow: var(--shadow-lg);
             animation: popIn .18s ease;
         }
+
         .tools-menu-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -1583,6 +1756,282 @@
             display: none !important;
         }
 
+        /* ════════ AJOUTS v3 : favoris · série · citations · défi · thème ════════ */
+
+        /* — Cœur favori sur la couverture — */
+        .fav-heart {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, .82);
+            backdrop-filter: blur(2px);
+            font-size: 15px;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .18);
+            opacity: 0;
+            transform: scale(.85);
+            transition: opacity .15s, transform .15s;
+        }
+
+        html[data-theme="dark"] .fav-heart {
+            background: rgba(30, 26, 19, .82);
+        }
+
+        .book-card:hover .fav-heart,
+        .fav-heart.on {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .book-card.is-fav {
+            box-shadow: 0 0 0 1.5px var(--gold), var(--shadow);
+        }
+
+        /* — Puce citations — */
+        .quote-chip {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(26, 18, 8, .72);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 7px;
+            border-radius: 10px;
+            letter-spacing: .02em;
+        }
+
+        /* — Badge série et étoiles sur les cartes — */
+        .series-tag {
+            font-size: 11px;
+            color: var(--pal);
+            font-weight: 500;
+            margin: 2px 0 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-stars {
+            color: var(--gold);
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin: 1px 0;
+        }
+
+        /* — Case « favori » dans la modale — */
+        .fav-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            color: var(--ink2);
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg2);
+        }
+
+        .fav-toggle input {
+            width: 17px;
+            height: 17px;
+            accent-color: var(--wish);
+        }
+
+        /* — Éditeur de citations — */
+        .quotes-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .quotes-empty {
+            font-size: 12px;
+            color: var(--ink3);
+            padding: 4px 0;
+        }
+
+        .quote-item {
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+            background: var(--bg2);
+            border-radius: 8px;
+            padding: 8px 10px;
+        }
+
+        .quote-text {
+            flex: 1;
+            font-size: 13px;
+            font-style: italic;
+            color: var(--ink2);
+            line-height: 1.4;
+        }
+
+        .quote-page {
+            font-style: normal;
+            font-size: 11px;
+            color: var(--ink3);
+            white-space: nowrap;
+        }
+
+        .quote-del {
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: .6;
+            flex-shrink: 0;
+        }
+
+        .quote-del:hover {
+            opacity: 1;
+        }
+
+        .quote-add-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        /* — Défi lecture : anneau de progression — */
+        .challenge-card {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .ring {
+            --p: 0;
+            --sz: 110px;
+            width: var(--sz);
+            height: var(--sz);
+            border-radius: 50%;
+            flex-shrink: 0;
+            background:
+                radial-gradient(closest-side, var(--cream) 72%, transparent 73% 100%),
+                conic-gradient(var(--gold) calc(var(--p) * 1%), var(--bg3) 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .ring-inner {
+            text-align: center;
+        }
+
+        .ring-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .ring-sub {
+            font-size: 10px;
+            color: var(--ink3);
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            margin-top: 3px;
+        }
+
+        .challenge-info {
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .challenge-goal-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .challenge-goal-row input {
+            width: 74px;
+            padding: 7px 8px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            background: var(--cream);
+            color: var(--ink);
+        }
+
+        /* — Histogramme mensuel — */
+        .month-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            height: 110px;
+            margin-top: 8px;
+        }
+
+        .month-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            height: 100%;
+            justify-content: flex-end;
+        }
+
+        .month-bar {
+            width: 100%;
+            max-width: 26px;
+            background: var(--gold);
+            border-radius: 4px 4px 0 0;
+            min-height: 3px;
+            transition: height .3s;
+        }
+
+        .month-bar.empty {
+            background: var(--bg3);
+        }
+
+        .month-lbl {
+            font-size: 9px;
+            color: var(--ink3);
+        }
+
+        .month-val {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--ink2);
+            min-height: 12px;
+        }
+
+        .streak-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--wish-bg);
+            color: var(--wish);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        html[data-theme="dark"] .quote-chip {
+            background: rgba(0, 0, 0, .6);
+        }
     </style>
 </head>
 
@@ -1625,6 +2074,7 @@
             </nav>
 
             <div class="sidebar-tools">
+                <button class="side-btn theme-btn" onclick="toggleTheme()">🌙 Mode sombre</button>
                 <button class="side-btn" onclick="exportJSON()">⬇️ Sauvegarder (.json)</button>
                 <button class="side-btn" onclick="document.getElementById('import-file').click()">⬆️ Restaurer une
                     sauvegarde</button>
@@ -1677,6 +2127,7 @@
             <div class="tools-menu" id="tools-menu" onclick="if(event.target===this)this.classList.remove('open')">
                 <div class="tools-menu-panel">
                     <div class="tools-menu-title">Sauvegardes</div>
+                    <button class="side-btn theme-btn" onclick="toggleTheme();closeToolsMenu()">🌙 Mode sombre</button>
                     <button class="side-btn" onclick="exportJSON();closeToolsMenu()">⬇️ Sauvegarder (.json)</button>
                     <button class="side-btn"
                         onclick="document.getElementById('import-file').click();closeToolsMenu()">⬆️ Restaurer une
@@ -1731,6 +2182,8 @@
                                     onclick="setFilter('pal',this)">PAL</button>
                                 <button class="filter-btn" data-filter="wish"
                                     onclick="setFilter('wish',this)">Envie</button>
+                                <button class="filter-btn" data-filter="fav" onclick="setFilter('fav',this)">❤️
+                                    Favoris</button>
                             </div>
                             <select class="mini-select" id="sort-select" onchange="renderGrid()"
                                 title="Trier la bibliothèque">
@@ -1740,6 +2193,7 @@
                                 <option value="pages">Trier : pages ↓</option>
                                 <option value="rating">Trier : note ↓</option>
                                 <option value="year">Trier : année ↓</option>
+                                <option value="series">Trier : par série</option>
                             </select>
                         </div>
                     </div>
@@ -1814,6 +2268,28 @@
                         <div class="section-title">📊 Calculateurs & Statistiques</div>
                     </div>
                     <div class="calc-grid">
+                        <div class="calc-card" style="grid-column:1/-1">
+                            <h3>🎯 Défi lecture <span id="challenge-year"
+                                    style="color:var(--ink3);font-weight:400"></span></h3>
+                            <div class="challenge-card">
+                                <div class="ring" id="challenge-ring">
+                                    <div class="ring-inner">
+                                        <div class="ring-num" id="challenge-num">0</div>
+                                        <div class="ring-sub" id="challenge-den">/ 0</div>
+                                    </div>
+                                </div>
+                                <div class="challenge-info">
+                                    <div id="challenge-msg" style="font-size:13px;color:var(--ink2)"></div>
+                                    <div class="challenge-goal-row">
+                                        <span style="font-size:12px;color:var(--ink3)">Objectif :</span>
+                                        <input type="number" id="challenge-goal" min="0" max="999"
+                                            onchange="setChallengeGoal(this.value)" placeholder="0">
+                                        <span style="font-size:12px;color:var(--ink3)">livres</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="calc-card">
                             <h3>📚 Livres lus</h3>
                             <div class="calc-big" id="calc-read">0</div>
@@ -1875,6 +2351,14 @@
                             <div class="calc-big" id="calc-avg">—</div>
                             <div class="calc-label">note moyenne sur 5</div>
                             <div style="margin-top:12px" id="rating-dist"></div>
+                        </div>
+
+                        <div class="calc-card" style="grid-column:1/-1">
+                            <h3>📈 Lectures dans le temps <span id="months-year"
+                                    style="color:var(--ink3);font-weight:400"></span></h3>
+                            <div class="calc-label" id="months-total">0 livre terminé cette année</div>
+                            <div class="month-chart" id="month-chart"></div>
+                            <div id="streak-info"></div>
                         </div>
                     </div>
                 </div>
@@ -2001,13 +2485,14 @@
                     <input class="form-input" id="f-year" type="number" placeholder="ex : 2026" min="1900" max="2099">
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Note /5</label>
-                    <div class="stars" id="star-picker">
-                        <span class="star" onclick="setRating(1)" data-r="1">☆</span>
-                        <span class="star" onclick="setRating(2)" data-r="2">☆</span>
-                        <span class="star" onclick="setRating(3)" data-r="3">☆</span>
-                        <span class="star" onclick="setRating(4)" data-r="4">☆</span>
-                        <span class="star" onclick="setRating(5)" data-r="5">☆</span>
+                    <label class="form-label">Note /5 <span style="color:var(--ink3);font-weight:400"
+                            id="rating-val"></span></label>
+                    <div class="stars" id="star-picker" title="Cliquez à gauche d'une étoile pour une demi-note">
+                        <span class="star" data-r="1"></span>
+                        <span class="star" data-r="2"></span>
+                        <span class="star" data-r="3"></span>
+                        <span class="star" data-r="4"></span>
+                        <span class="star" data-r="5"></span>
                     </div>
                 </div>
             </div>
@@ -2023,9 +2508,41 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Série (facultatif)</label>
+                    <input class="form-input" id="f-series" placeholder="ex : Harry Potter">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Tome n°</label>
+                    <input class="form-input" id="f-seriesnum" type="number" min="0" step="0.5" placeholder="ex : 1">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="fav-toggle">
+                    <input type="checkbox" id="f-favorite">
+                    <span>❤️ Marquer comme favori</span>
+                </label>
+            </div>
+
             <div class="form-group">
                 <label class="form-label">Notes / avis personnel</label>
                 <textarea class="form-textarea" id="f-notes" placeholder="Vos impressions sur le livre…"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">📖 Citations & passages favoris</label>
+                <div id="quotes-list" class="quotes-list"></div>
+                <div class="quote-add">
+                    <textarea class="form-textarea" id="q-text" rows="2"
+                        placeholder="Un passage que vous aimez…"></textarea>
+                    <div class="quote-add-row">
+                        <input class="form-input" id="q-page" type="number" min="0" placeholder="Page"
+                            style="width:90px">
+                        <button type="button" class="btn btn-ghost" onclick="addQuote()">+ Ajouter la citation</button>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
@@ -2175,10 +2692,27 @@
         let currentEmoji = '📕';
         let currentCover = '';
         let currentRating = 0;
+        let currentQuotes = [];
         let dragSrcId = null;
 
         const STORAGE_KEY = 'bibliotrack_books';
+        const SETTINGS_KEY = 'bibliotrack_settings';
         const SCHEMA = 2;
+
+        // Réglages persistants (thème, défi lecture). Sauvés séparément des livres.
+        let settings = { theme: 'light', challengeYear: new Date().getFullYear(), challengeGoal: 0 };
+
+        function loadSettings() {
+            try {
+                const raw = localStorage.getItem(SETTINGS_KEY);
+                if (raw) settings = Object.assign(settings, JSON.parse(raw));
+            } catch (e) { }
+        }
+        function saveSettings() {
+            try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { }
+            if (window.storage) { try { window.storage.set(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { } }
+            try { idb.set(SETTINGS_KEY, JSON.stringify(settings)); } catch (e) { }
+        }
 
         // ── INDEXEDDB ─────────────────────────────────────────────────────────────
         const idb = (() => {
@@ -2271,10 +2805,12 @@
             const best = cands.filter(Boolean).sort((a, b) =>
                 (b.savedAt - a.savedAt) || (b.books.length - a.books.length))[0];
             books = best ? best.books.map(migrate) : [];
-            if (best) saveDeep();               // on réaligne les autres couches
+            if (best) { saveLocal(); saveDeep(); }   // réaligne les trois couches après migration
         }
 
         function migrate(b) {
+            let rating = parseFloat(b.rating) || 0;
+            rating = Math.max(0, Math.min(5, Math.round(rating * 2) / 2)); // pas de 0,5
             return {
                 id: b.id || uid(),
                 title: b.title || '',
@@ -2285,11 +2821,18 @@
                 notes: b.notes || '',
                 status: ['read', 'reading', 'pal', 'wish'].includes(b.status) ? b.status : 'pal',
                 emoji: b.emoji || '📕',
-                rating: b.rating || 0,
+                rating: rating,
                 cover: safeCoverUrl(b.cover),
                 coverAlt: safeCoverUrl(b.coverAlt),
                 isbn: b.isbn || '',
                 progress: b.progress || 0,
+                favorite: !!b.favorite,
+                series: b.series || '',
+                seriesNum: (b.seriesNum === 0 || b.seriesNum) ? (parseFloat(b.seriesNum) || null) : null,
+                quotes: Array.isArray(b.quotes)
+                    ? b.quotes.filter(q => q && q.text).map(q => ({ text: String(q.text), page: parseInt(q.page) || null }))
+                    : [],
+                finishedAt: b.finishedAt || (b.status === 'read' ? (b.addedAt || Date.now()) : null),
                 addedAt: b.addedAt || Date.now()
             };
         }
@@ -2427,8 +2970,10 @@
         function getFiltered() {
             const q = (document.getElementById('search-input').value || '').trim().toLowerCase();
             let out = books.filter(b => {
-                const okStatus = currentFilter === 'all' || b.status === currentFilter;
-                const okQ = !q || (b.title + ' ' + b.author + ' ' + (b.genre || '') + ' ' + (b.isbn || ''))
+                const okStatus = currentFilter === 'all' ? true
+                    : currentFilter === 'fav' ? b.favorite
+                        : b.status === currentFilter;
+                const okQ = !q || (b.title + ' ' + b.author + ' ' + (b.genre || '') + ' ' + (b.isbn || '') + ' ' + (b.series || ''))
                     .toLowerCase().includes(q);
                 return okStatus && okQ;
             });
@@ -2440,6 +2985,7 @@
                 pages: (a, b) => (b.pages || 0) - (a.pages || 0),
                 rating: (a, b) => (b.rating || 0) - (a.rating || 0),
                 year: (a, b) => (b.year || 0) - (a.year || 0),
+                series: (a, b) => (a.series || '~').localeCompare(b.series || '~', 'fr') || ((a.seriesNum || 0) - (b.seriesNum || 0)),
             }[sort];
             return cmp ? out.slice().sort(cmp) : out;
         }
@@ -2462,14 +3008,19 @@
             empty.style.display = 'none';
 
             grid.innerHTML = filtered.map(b => `
-            <div class="book-card">
+            <div class="book-card${b.favorite ? ' is-fav' : ''}">
               <div class="book-cover" onclick="editBook('${b.id}')" title="Modifier ${esc(b.title)}">
         ${coverImg(b, 'real-cover', gridFallback(b))}
         <div class="book-status-dot dot-${b.status}"></div>
+        <button class="fav-heart${b.favorite ? ' on' : ''}" title="Favori"
+          onclick="toggleFavorite('${b.id}', event)">${b.favorite ? '❤️' : '🤍'}</button>
+        ${b.quotes && b.quotes.length ? `<span class="quote-chip" title="${b.quotes.length} citation(s)">❝ ${b.quotes.length}</span>` : ''}
               </div>
               <div class="book-info">
         <div class="book-title">${esc(b.title)}</div>
         <div class="book-author">${esc(b.author || 'Auteur inconnu')}</div>
+        ${b.series ? `<div class="series-tag">📖 ${esc(b.series)}${b.seriesNum ? ' · T.' + b.seriesNum : ''}</div>` : ''}
+        ${b.rating ? `<div class="card-stars">${starStr(b.rating)}</div>` : ''}
         ${b.status === 'reading' && b.pages ? `<div class="prog-mini"><i style="width:${pct(b)}%"></i></div>` : ''}
         <div class="book-meta">
           <span class="book-pages">${b.pages ? b.pages + ' p.' : '—'}</span>
@@ -2519,10 +3070,12 @@
         <div class="book-list-title">${esc(b.title)}</div>
         <div class="book-list-author">${esc(b.author || 'Auteur inconnu')}</div>
         <div class="book-list-meta">
+          ${b.series ? `<span class="note-tag" style="color:var(--pal)">📖 ${esc(b.series)}${b.seriesNum ? ' T.' + b.seriesNum : ''}</span>` : ''}
           ${b.pages ? `<span class="note-tag">📄 ${b.pages} pages</span>` : ''}
           ${b.genre ? `<span class="note-tag">🏷 ${esc(b.genre)}</span>` : ''}
           ${b.year ? `<span class="note-tag">📅 ${b.year}</span>` : ''}
-          ${b.rating ? `<span class="note-tag">${'⭐'.repeat(b.rating)}</span>` : ''}
+          ${b.rating ? `<span class="note-tag" style="color:var(--gold)">${starStr(b.rating)}</span>` : ''}
+          ${b.quotes && b.quotes.length ? `<span class="note-tag">❝ ${b.quotes.length}</span>` : ''}
         </div>
         ${status === 'reading' ? `
           <div class="prog-mini"><i style="width:${pct(b)}%"></i></div>
@@ -2534,6 +3087,7 @@
           </div>` : ''}
               </div>
               <div class="book-list-actions">
+        <button class="icon-btn" title="${b.favorite ? 'Retirer des favoris' : 'Ajouter aux favoris'}" onclick="toggleFavorite('${b.id}', event)">${b.favorite ? '❤️' : '🤍'}</button>
         ${status !== 'read' ? `<button class="icon-btn" title="Marquer comme lu" onclick="markAs('${b.id}','read')">✅</button>` : ''}
         ${status !== 'reading' ? `<button class="icon-btn" title="Commencer la lecture" onclick="markAs('${b.id}','reading')">📖</button>` : ''}
         ${status === 'wish' ? `<button class="icon-btn" title="Ajouter à la PAL" onclick="markAs('${b.id}','pal')">📚</button>` : ''}
@@ -2656,22 +3210,108 @@
            ${thisYear.reduce((s, b) => s + (b.pages || 0), 0).toLocaleString('fr-FR')} pages lues en ${year}.</div>`
                 : `<div style="font-size:12px;color:var(--ink3)">Renseignez l'année de lecture de vos livres lus pour suivre votre rythme.</div>`;
 
-            // Notes
+            // Notes (regroupées par étoile entière, demi-notes incluses)
             const rated = books.filter(b => b.rating > 0);
             set('calc-avg', rated.length ? (rated.reduce((s, b) => s + b.rating, 0) / rated.length).toFixed(1) : '—');
             const dist = document.getElementById('rating-dist');
             if (rated.length) {
-                const max = Math.max(...[1, 2, 3, 4, 5].map(n => rated.filter(b => b.rating === n).length));
+                const bucket = n => rated.filter(b => Math.ceil(b.rating) === n).length;
+                const max = Math.max(...[1, 2, 3, 4, 5].map(bucket), 1);
                 dist.innerHTML = [5, 4, 3, 2, 1].map(n => {
-                    const c = rated.filter(b => b.rating === n).length;
+                    const c = bucket(n);
                     return `<div class="chart-bar-item">
-            <div class="chart-bar-label">${'⭐'.repeat(n)}</div>
+            <div class="chart-bar-label" style="color:var(--gold)">${'★'.repeat(n)}</div>
             <div class="chart-bar-track"><div class="chart-bar-fill" style="width:${max ? Math.round(c / max * 100) : 0}%;background:var(--gold)"></div></div>
             <div class="chart-bar-val">${c}</div></div>`;
                 }).join('');
             } else {
                 dist.innerHTML = `<div style="font-size:12px;color:var(--ink3)">Notez vos lectures pour voir la répartition.</div>`;
             }
+
+            updateChallenge();
+            updateMonthlyStats();
+        }
+
+        // ── DÉFI LECTURE ──────────────────────────────────────────────────────────
+        function finishedInYear(y) {
+            return books.filter(b => b.status === 'read' &&
+                ((b.finishedAt && new Date(b.finishedAt).getFullYear() === y) ||
+                    (!b.finishedAt && b.year === y)));
+        }
+
+        function updateChallenge() {
+            const y = new Date().getFullYear();
+            if (settings.challengeYear !== y) { settings.challengeYear = y; } // suit l'année en cours
+            const done = finishedInYear(y).length;
+            const goal = settings.challengeGoal || 0;
+            const pctv = goal ? Math.min(100, Math.round(done / goal * 100)) : 0;
+
+            set('challenge-year', y);
+            set('challenge-num', done);
+            set('challenge-den', '/ ' + (goal || '—'));
+            const ring = document.getElementById('challenge-ring');
+            if (ring) ring.style.setProperty('--p', pctv);
+            const gi = document.getElementById('challenge-goal');
+            if (gi && document.activeElement !== gi) gi.value = goal || '';
+
+            const msg = document.getElementById('challenge-msg');
+            if (!goal) {
+                msg.innerHTML = `Fixez-vous un objectif de lecture pour <b>${y}</b> et suivez votre progression.`;
+            } else if (done >= goal) {
+                msg.innerHTML = `🎉 Objectif atteint ! <b>${done}</b> livres lus sur ${goal}. Bravo !`;
+            } else {
+                const remaining = goal - done;
+                const monthsLeft = 12 - new Date().getMonth();
+                const perMonth = (remaining / Math.max(1, monthsLeft)).toFixed(1);
+                msg.innerHTML = `Plus que <b>${remaining}</b> livre(s) d'ici la fin de l'année — environ <b>${perMonth}</b> par mois.`;
+            }
+        }
+
+        function setChallengeGoal(v) {
+            settings.challengeGoal = Math.max(0, parseInt(v) || 0);
+            settings.challengeYear = new Date().getFullYear();
+            saveSettings();
+            updateChallenge();
+        }
+
+        // ── LECTURES DANS LE TEMPS ────────────────────────────────────────────────
+        const MONTHS_FR = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+
+        function updateMonthlyStats() {
+            const y = new Date().getFullYear();
+            const finished = finishedInYear(y);
+            const perMonth = new Array(12).fill(0);
+            finished.forEach(b => {
+                const m = b.finishedAt ? new Date(b.finishedAt).getMonth() : null;
+                if (m !== null) perMonth[m]++;
+                else perMonth[Math.min(11, new Date().getMonth())]++; // sans date précise : mois courant
+            });
+            const max = Math.max(...perMonth, 1);
+
+            set('months-year', y);
+            set('months-total', `${finished.length} livre${finished.length > 1 ? 's' : ''} terminé${finished.length > 1 ? 's' : ''} en ${y}`);
+
+            const chart = document.getElementById('month-chart');
+            chart.innerHTML = perMonth.map((n, i) => `
+        <div class="month-col">
+          <div class="month-val">${n || ''}</div>
+          <div class="month-bar${n ? '' : ' empty'}" style="height:${n ? Math.max(6, Math.round(n / max * 100)) : 3}%"
+            title="${MONTHS_FR[i]} : ${n} livre(s)"></div>
+          <div class="month-lbl">${MONTHS_FR[i][0]}</div>
+        </div>`).join('');
+
+            // Série de mois consécutifs avec au moins une lecture, jusqu'au mois courant
+            const streak = document.getElementById('streak-info');
+            const curMonth = new Date().getMonth();
+            let run = 0;
+            for (let m = curMonth; m >= 0; m--) {
+                if (perMonth[m] > 0) run++; else break;
+            }
+            streak.innerHTML = run >= 2
+                ? `<div class="streak-badge">🔥 ${run} mois de lecture d'affilée</div>`
+                : (finished.length
+                    ? `<div style="font-size:12px;color:var(--ink3);margin-top:8px">Lisez ce mois-ci et le prochain pour lancer une série.</div>`
+                    : `<div style="font-size:12px;color:var(--ink3);margin-top:8px">Marquez des livres comme « lus » pour voir votre activité mensuelle.</div>`);
         }
 
         function renderGenreChart(list, containerId, color) {
@@ -2711,6 +3351,11 @@
             val('f-notes', b ? b.notes : '');
             val('f-isbn', b ? b.isbn : '');
             val('f-progress', b && b.progress ? b.progress : '');
+            val('f-series', b ? b.series : '');
+            val('f-seriesnum', b && (b.seriesNum || b.seriesNum === 0) ? b.seriesNum : '');
+            document.getElementById('f-favorite').checked = b ? !!b.favorite : false;
+            currentQuotes = b && Array.isArray(b.quotes) ? b.quotes.map(q => ({ ...q })) : [];
+            renderQuoteEditor();
             val('f-cover', currentCover);
             updateCoverPreview();
 
@@ -2740,10 +3385,65 @@
             updateCoverPreview();
         }
 
+        // ── CITATIONS (dans la modale) ────────────────────────────────────────────
+        function renderQuoteEditor() {
+            const box = document.getElementById('quotes-list');
+            if (!box) return;
+            if (!currentQuotes.length) {
+                box.innerHTML = '<div class="quotes-empty">Aucune citation pour l\'instant.</div>';
+                return;
+            }
+            box.innerHTML = currentQuotes.map((q, i) => `
+      <div class="quote-item">
+        <div class="quote-text">« ${esc(q.text)} »${q.page ? ` <span class="quote-page">p. ${q.page}</span>` : ''}</div>
+        <button type="button" class="quote-del" title="Supprimer" onclick="removeQuote(${i})">🗑</button>
+      </div>`).join('');
+        }
+
+        function addQuote() {
+            const text = get('q-text');
+            if (!text) { showToast('⚠️ Écrivez la citation avant de l\'ajouter.'); return; }
+            const page = parseInt(get('q-page')) || null;
+            currentQuotes.push({ text, page });
+            val('q-text', ''); val('q-page', '');
+            renderQuoteEditor();
+        }
+
+        function removeQuote(i) {
+            currentQuotes.splice(i, 1);
+            renderQuoteEditor();
+        }
+
         function setRating(n) { currentRating = n; setRatingDisplay(n); }
         function setRatingDisplay(n) {
-            document.querySelectorAll('.star').forEach(s => {
-                s.textContent = parseInt(s.dataset.r) <= n ? '⭐' : '☆';
+            document.querySelectorAll('#star-picker .star').forEach(s => {
+                const r = parseInt(s.dataset.r);
+                s.textContent = n >= r ? '★' : (n >= r - 0.5 ? '⯨' : '☆');
+                s.classList.toggle('filled', n >= r - 0.5);
+            });
+            const lbl = document.getElementById('rating-val');
+            if (lbl) lbl.textContent = n ? '— ' + starStr(n) : '';
+        }
+
+        // Rendu compact d'une note en étoiles (avec demi et vides), pour cartes/listes
+        function starStr(n) {
+            const full = Math.floor(n);
+            const half = (n - full) >= 0.5;
+            return '★'.repeat(full) + (half ? '⯨' : '') + '☆'.repeat(5 - full - (half ? 1 : 0));
+        }
+
+        // Clic sur les étoiles : moitié gauche = demi-note, moitié droite = note pleine
+        function initStarPicker() {
+            const picker = document.getElementById('star-picker');
+            if (!picker || picker._bound) return;
+            picker._bound = true;
+            picker.querySelectorAll('.star').forEach(star => {
+                star.addEventListener('click', e => {
+                    const r = parseInt(star.dataset.r);
+                    const rect = star.getBoundingClientRect();
+                    const half = (e.clientX - rect.left) < rect.width / 2;
+                    setRating(half ? r - 0.5 : r);
+                });
             });
         }
 
@@ -2811,11 +3511,18 @@
             }
         }
 
+        // Détermine la date de fin de lecture : posée quand un livre passe en « lu »,
+        // conservée s'il l'était déjà, effacée sinon.
+        function computeFinishedAt(prev, status) {
+            if (status !== 'read') return null;
+            if (prev && prev.status === 'read' && prev.finishedAt) return prev.finishedAt;
+            return Date.now();
+        }
+
         function saveBook() {
             const title = get('f-title');
             if (!title) { showToast('⚠️ Le titre est obligatoire.'); return; }
             const prev = editId ? books.find(b => b.id === editId) : null;
-
             const book = migrate({
                 id: editId || uid(),
                 title,
@@ -2831,6 +3538,11 @@
                 status: currentStatus,
                 emoji: currentEmoji,
                 rating: currentRating,
+                favorite: document.getElementById('f-favorite').checked,
+                series: get('f-series'),
+                seriesNum: get('f-seriesnum') !== '' ? (parseFloat(get('f-seriesnum')) || null) : null,
+                quotes: currentQuotes,
+                finishedAt: computeFinishedAt(prev, currentStatus),
                 addedAt: prev ? prev.addedAt : Date.now(),
             });
 
@@ -2877,13 +3589,26 @@
         }
 
         function markAs(id, status) {
-            books = books.map(b => b.id === id ? { ...b, status } : b);
+            books = books.map(b => {
+                if (b.id !== id) return b;
+                return { ...b, status, finishedAt: computeFinishedAt(b, status) };
+            });
             saveNow();
             renderAll();
             showToast({
                 read: '✅ Marqué comme lu.', reading: '📖 Lecture commencée.',
                 pal: '📚 Ajouté à la PAL.', wish: '⭐ Ajouté aux envies.'
             }[status]);
+        }
+
+        function toggleFavorite(id, ev) {
+            if (ev) ev.stopPropagation();
+            const b = books.find(x => x.id === id);
+            if (!b) return;
+            b.favorite = !b.favorite;
+            saveNow();
+            renderAll();
+            showToast(b.favorite ? '❤️ Ajouté aux favoris.' : '🤍 Retiré des favoris.');
         }
 
         // ── GLISSER-DÉPOSER (PAL) ─────────────────────────────────────────────────
@@ -2966,19 +3691,20 @@
         }
 
         function loadSample() {
-            const S = (t, a, p, g, y, st, e, r, isbn) => migrate({
-                id: uid(), title: t, author: a, pages: p, genre: g, year: y,
-                status: st, emoji: e, rating: r, isbn, addedAt: Date.now()
-            });
+            const y = new Date().getFullYear();
+            const fin = (mois) => new Date(y, mois, 12).getTime(); // date de fin de lecture cette année
+            const S = (o) => migrate(Object.assign({ id: uid(), addedAt: Date.now() }, o));
             books = [
-                S('Le Rouge et le Noir', 'Stendhal', 503, 'Classique', 2023, 'read', '📕', 5, '9782070413003'),
-                S('Dune', 'Frank Herbert', 688, 'Science-fiction', 2024, 'read', '🌊', 5, '9782266320481'),
-                S('Les Misérables', 'Victor Hugo', 1232, 'Classique', 2022, 'read', '📗', 5, '9782253096337'),
-                S('Fondation', 'Isaac Asimov', 372, 'Science-fiction', null, 'pal', '🔮', 0, '9782070415717'),
-                S('La Horde du Contrevent', 'Alain Damasio', 736, 'Science-fiction', null, 'reading', '🏔️', 0, '9782070348909'),
-                S('Le Nom de la Rose', 'Umberto Eco', 502, 'Roman policier', null, 'wish', '🗡️', 0, '9782253033134'),
-                S('1984', 'George Orwell', 328, 'Science-fiction', null, 'wish', '📘', 0, '9782072862496'),
+                S({ title: 'Le Rouge et le Noir', author: 'Stendhal', pages: 503, genre: 'Classique', status: 'read', emoji: '📕', rating: 5, isbn: '9782070413003', year: y, finishedAt: fin(0), favorite: true, quotes: [{ text: 'Le roman est un miroir que l\'on promène le long d\'un chemin.', page: 342 }] }),
+                S({ title: 'Dune', author: 'Frank Herbert', pages: 688, genre: 'Science-fiction', status: 'read', emoji: '🌊', rating: 4.5, isbn: '9782266320481', year: y, finishedAt: fin(1), series: 'Le Cycle de Dune', seriesNum: 1, favorite: true }),
+                S({ title: 'Les Misérables', author: 'Victor Hugo', pages: 1232, genre: 'Classique', status: 'read', emoji: '📗', rating: 5, isbn: '9782253096337', year: y, finishedAt: fin(3) }),
+                S({ title: 'Le Messie de Dune', author: 'Frank Herbert', pages: 350, genre: 'Science-fiction', status: 'pal', emoji: '🏜️', isbn: '9782266133302', series: 'Le Cycle de Dune', seriesNum: 2 }),
+                S({ title: 'Fondation', author: 'Isaac Asimov', pages: 372, genre: 'Science-fiction', status: 'pal', emoji: '🔮', isbn: '9782070415717' }),
+                S({ title: 'La Horde du Contrevent', author: 'Alain Damasio', pages: 736, genre: 'Science-fiction', status: 'reading', emoji: '🏔️', isbn: '9782070348909', progress: 300 }),
+                S({ title: 'Le Nom de la Rose', author: 'Umberto Eco', pages: 502, genre: 'Roman policier', status: 'wish', emoji: '🗡️', isbn: '9782253033134' }),
+                S({ title: '1984', author: 'George Orwell', pages: 328, genre: 'Science-fiction', status: 'wish', emoji: '📘', isbn: '9782072862496' }),
             ].concat(books);
+            if (!settings.challengeGoal) { settings.challengeGoal = 20; saveSettings(); }
             saveNow();
             renderAll();
             showToast('📚 Exemples chargés.');
@@ -3173,6 +3899,22 @@
         }
         function closeToolsMenu() {
             document.getElementById('tools-menu').classList.remove('open');
+        }
+
+        // ── THÈME (clair / sombre) ────────────────────────────────────────────────
+        function applyTheme(theme) {
+            const dark = theme === 'dark';
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            const meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', dark ? '#14110c' : '#1a1208');
+            document.querySelectorAll('.theme-btn').forEach(b => {
+                b.textContent = dark ? '☀️ Mode clair' : '🌙 Mode sombre';
+            });
+        }
+        function toggleTheme() {
+            settings.theme = settings.theme === 'dark' ? 'light' : 'dark';
+            applyTheme(settings.theme);
+            saveSettings();
         }
 
         function openScanModal() {
@@ -3622,6 +4364,9 @@
             if (navigator.storage && navigator.storage.persist) {
                 try { await navigator.storage.persist(); } catch (e) { }
             }
+            loadSettings();
+            applyTheme(settings.theme);
+            initStarPicker();
             await loadBooks();
             renderAll();
             markSaved();
@@ -3631,7 +4376,7 @@
         window.addEventListener('beforeunload', saveLocal);
         window.addEventListener('pagehide', saveLocal);
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') saveNow(); 
+            if (document.visibilityState === 'hidden') saveNow();
         });
 
         // Raccourcis clavier
