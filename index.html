@@ -65,6 +65,69 @@
         html[data-theme="dark"] body {
             background: var(--bg);
         }
+
+        /* — Éléments « chrome » qui doivent rester sombres (ils utilisent var(--ink),
+           qui s'éclaircit en mode sombre : on fige un fond sombre dédié) — */
+        html[data-theme="dark"] .sidebar,
+        html[data-theme="dark"] .mobile-nav,
+        html[data-theme="dark"] .tools-menu-panel,
+        html[data-theme="dark"] .toast {
+            background: #0f0c07;
+        }
+
+        /* — Couvertures de secours : fonds sombres teintés + titre clair lisible — */
+        html[data-theme="dark"] .cover-fallback {
+            background: linear-gradient(135deg, var(--bg2), var(--bg3)) !important;
+        }
+
+        html[data-theme="dark"] .cover-fallback.fb-read {
+            background: linear-gradient(135deg, #16281f, #1d3529) !important;
+        }
+
+        html[data-theme="dark"] .cover-fallback.fb-reading {
+            background: linear-gradient(135deg, #15202f, #1c2c42) !important;
+        }
+
+        html[data-theme="dark"] .cover-fallback.fb-pal {
+            background: linear-gradient(135deg, #221a30, #2d2242) !important;
+        }
+
+        html[data-theme="dark"] .cover-fallback.fb-wish {
+            background: linear-gradient(135deg, #2b1a1a, #3b2222) !important;
+        }
+
+        html[data-theme="dark"] .cover-fallback .fb-title {
+            color: var(--ink);
+        }
+
+        html[data-theme="dark"] .cover-thumb-fb {
+            background: var(--bg3);
+        }
+
+        /* — Étiquettes de genre : texte lisible sur fond sombre (au lieu de la teinte
+           foncée codée en dur, illisible) — */
+        html[data-theme="dark"] .genre-tag-sm {
+            color: var(--ink) !important;
+        }
+
+        /* — Survols/sélections clairs remplacés par une teinte dorée sombre — */
+        html[data-theme="dark"] .emoji-opt:hover,
+        html[data-theme="dark"] .emoji-opt.sel {
+            background: rgba(217, 169, 74, 0.16);
+        }
+
+        html[data-theme="dark"] .drag-over {
+            background: rgba(217, 169, 74, 0.12) !important;
+        }
+
+        html[data-theme="dark"] .filter-btn:hover {
+            color: var(--ink);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -1058,7 +1121,6 @@
                 transform: rotate(360deg);
             }
         }
-
         /* ════════ AJOUTS v2 ════════ */
         :root {
             --reading: #1f6feb;
@@ -1211,7 +1273,7 @@
             margin-top: 6px;
         }
 
-        .prog-mini>i {
+        .prog-mini > i {
             display: block;
             height: 100%;
             background: var(--reading);
@@ -1422,46 +1484,22 @@
         }
 
         /* ════════ MOBILE ════════ */
-        .only-mobile {
-            display: none;
-        }
-
-        .btn-icon-only {
-            display: none;
-        }
-
-        .mobile-nav {
-            display: none;
-        }
-
-        .tools-menu {
-            display: none;
-        }
+        .only-mobile { display: none; }
+        .btn-icon-only { display: none; }
+        .mobile-nav { display: none; }
+        .tools-menu { display: none; }
 
         @media (max-width: 960px) {
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .calc-grid {
-                grid-template-columns: 1fr;
-            }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .calc-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 760px) {
-
             /* La barre latérale laisse place à la nav basse */
-            .sidebar {
-                display: none;
-            }
+            .sidebar { display: none; }
+            .only-mobile { display: inline-flex; }
 
-            .only-mobile {
-                display: inline-flex;
-            }
-
-            .main {
-                width: 100%;
-            }
+            .main { width: 100%; }
 
             /* Barre du haut compacte : titre + recherche sur une ligne, actions dessous */
             .topbar {
@@ -1470,95 +1508,37 @@
                 gap: 10px;
                 row-gap: 10px;
             }
-
-            .topbar-title {
-                font-size: 18px;
-                order: 1;
-                flex: 1 1 auto;
-            }
-
-            .search-wrap {
-                order: 3;
-                flex: 1 1 100%;
-            }
-
-            .search-wrap input {
-                width: 100%;
-                font-size: 16px;
-            }
-
-            .topbar .btn {
-                order: 2;
-                padding: 10px 12px;
-            }
-
-            .btn-label {
-                display: none;
-            }
-
-            .btn-icon-only {
-                display: inline;
-            }
-
+            .topbar-title { font-size: 18px; order: 1; flex: 1 1 auto; }
+            .search-wrap { order: 3; flex: 1 1 100%; }
+            .search-wrap input { width: 100%; font-size: 16px; }
+            .topbar .btn { order: 2; padding: 10px 12px; }
+            .btn-label { display: none; }
+            .btn-icon-only { display: inline; }
             /* Le bouton scanner garde son libellé masqué mais reste tapable */
-            .topbar .btn-ghost[title="Scanner un code-barres"] {
-                font-size: 16px;
-            }
+            .topbar .btn-ghost[title="Scanner un code-barres"] { font-size: 16px; }
 
-            .content {
-                padding: 16px 14px calc(76px + env(safe-area-inset-bottom));
-            }
+            .content { padding: 16px 14px calc(76px + env(safe-area-inset-bottom)); }
 
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .stat-card {
-                padding: 14px;
-            }
-
-            .stat-card-val {
-                font-size: 26px;
-            }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .stat-card { padding: 14px; }
+            .stat-card-val { font-size: 26px; }
 
             .books-grid {
                 grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
                 gap: 12px;
             }
 
-            .section-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .toolbar {
-                width: 100%;
-            }
-
-            .filter-row {
-                flex-wrap: wrap;
-            }
-
-            .mini-select {
-                flex: 1 1 100%;
-            }
+            .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .toolbar { width: 100%; }
+            .filter-row { flex-wrap: wrap; }
+            .mini-select { flex: 1 1 100%; }
 
             /* Champs : 16px évite le zoom automatique iOS */
-            .form-input,
-            .form-select,
-            .form-textarea,
-            #isbn-input,
-            #title-input {
-                font-size: 16px;
-            }
+            .form-input, .form-select, .form-textarea,
+            #isbn-input, #title-input { font-size: 16px; }
 
             /* Modales plein écran, ancrées en bas */
-            .overlay {
-                align-items: flex-end;
-            }
-
+            .overlay { align-items: flex-end; }
             .modal {
                 width: 100%;
                 max-width: 100%;
@@ -1566,70 +1546,24 @@
                 border-radius: 18px 18px 0 0;
                 padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
             }
-
-            #scan-overlay .modal {
-                width: 100% !important;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-footer {
-                position: sticky;
-                bottom: 0;
-                background: var(--bg);
-                padding-top: 12px;
-            }
-
-            .modal-footer .btn {
-                flex: 1;
-                padding: 13px;
-            }
-
-            .status-tab {
-                padding: 11px 6px;
-                font-size: 12px;
-            }
-
-            .emoji-opt {
-                width: 44px;
-                height: 44px;
-            }
-
-            .cover-editor {
-                flex-wrap: wrap;
-            }
+            #scan-overlay .modal { width: 100% !important; }
+            .form-row { grid-template-columns: 1fr; }
+            .modal-footer { position: sticky; bottom: 0; background: var(--bg); padding-top: 12px; }
+            .modal-footer .btn { flex: 1; padding: 13px; }
+            .status-tab { padding: 11px 6px; font-size: 12px; }
+            .emoji-opt { width: 44px; height: 44px; }
+            .cover-editor { flex-wrap: wrap; }
 
             /* Cibles tactiles plus généreuses */
-            .icon-btn {
-                min-width: 40px;
-                min-height: 40px;
-            }
-
-            .book-actions {
-                opacity: 1;
-            }
-
-            .scan-tab {
-                padding: 11px 4px;
-                font-size: 12px;
-            }
-
-            .scan-frame {
-                max-height: none;
-                aspect-ratio: 3/4;
-            }
+            .icon-btn { min-width: 40px; min-height: 40px; }
+            .book-actions { opacity: 1; }
+            .scan-tab { padding: 11px 4px; font-size: 12px; }
+            .scan-frame { max-height: none; aspect-ratio: 3/4; }
         }
 
         @media (max-width: 400px) {
-            .mnav-lbl {
-                font-size: 9px;
-            }
-
-            .stat-card-val {
-                font-size: 22px;
-            }
+            .mnav-lbl { font-size: 9px; }
+            .stat-card-val { font-size: 22px; }
         }
 
         /* ── Barre de navigation basse ── */
@@ -1642,11 +1576,10 @@
                 right: 0;
                 z-index: 40;
                 background: var(--ink);
-                border-top: 1px solid rgba(255, 255, 255, .08);
+                border-top: 1px solid rgba(255,255,255,.08);
                 padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
-                box-shadow: 0 -4px 20px rgba(0, 0, 0, .12);
+                box-shadow: 0 -4px 20px rgba(0,0,0,.12);
             }
-
             .mnav-item {
                 flex: 1;
                 background: none;
@@ -1662,21 +1595,9 @@
                 position: relative;
                 transition: color .15s;
             }
-
-            .mnav-item.active {
-                color: var(--gold2);
-            }
-
-            .mnav-ico {
-                font-size: 19px;
-                line-height: 1;
-            }
-
-            .mnav-lbl {
-                font-size: 10px;
-                letter-spacing: .01em;
-            }
-
+            .mnav-item.active { color: var(--gold2); }
+            .mnav-ico { font-size: 19px; line-height: 1; }
+            .mnav-lbl { font-size: 10px; letter-spacing: .01em; }
             .mnav-badge {
                 position: absolute;
                 top: 2px;
@@ -1694,10 +1615,7 @@
                 align-items: center;
                 justify-content: center;
             }
-
-            .mnav-badge.show {
-                display: flex;
-            }
+            .mnav-badge.show { display: flex; }
         }
 
         /* ── Menu outils (mobile) ── */
@@ -1706,9 +1624,8 @@
             position: fixed;
             inset: 0;
             z-index: 60;
-            background: rgba(20, 14, 4, .45);
+            background: rgba(20,14,4,.45);
         }
-
         .tools-menu-panel {
             position: absolute;
             top: 64px;
@@ -1725,7 +1642,6 @@
             box-shadow: var(--shadow-lg);
             animation: popIn .18s ease;
         }
-
         .tools-menu-title {
             font-size: 11px;
             text-transform: uppercase;
@@ -2032,6 +1948,7 @@
         html[data-theme="dark"] .quote-chip {
             background: rgba(0, 0, 0, .6);
         }
+
     </style>
 </head>
 
@@ -2182,8 +2099,8 @@
                                     onclick="setFilter('pal',this)">PAL</button>
                                 <button class="filter-btn" data-filter="wish"
                                     onclick="setFilter('wish',this)">Envie</button>
-                                <button class="filter-btn" data-filter="fav" onclick="setFilter('fav',this)">❤️
-                                    Favoris</button>
+                                <button class="filter-btn" data-filter="fav"
+                                    onclick="setFilter('fav',this)">❤️ Favoris</button>
                             </div>
                             <select class="mini-select" id="sort-select" onchange="renderGrid()"
                                 title="Trier la bibliothèque">
@@ -2940,7 +2857,7 @@
         }
 
         function gridFallback(b) {
-            return `<div class="cover-fallback" style="background:${COVER_COLORS[b.status] || COVER_COLORS.pal}">
+            return `<div class="cover-fallback fb-${b.status}" style="background:${COVER_COLORS[b.status] || COVER_COLORS.pal}">
                 <div style="font-size:34px">${b.emoji || '📕'}</div>
                 <div class="fb-title">${esc(b.title)}</div></div>`;
         }
@@ -4376,7 +4293,7 @@
         window.addEventListener('beforeunload', saveLocal);
         window.addEventListener('pagehide', saveLocal);
         document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') saveNow();
+            if (document.visibilityState === 'hidden') saveNow(); 
         });
 
         // Raccourcis clavier
