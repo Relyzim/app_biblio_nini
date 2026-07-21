@@ -861,7 +861,7 @@
         /* ── CALCULATOR VIEW ── */
         .calc-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
             gap: 20px;
         }
 
@@ -870,6 +870,7 @@
             border: 1px solid var(--border);
             border-radius: var(--r);
             padding: 24px;
+            min-width: 0;
         }
 
         .calc-card h3 {
@@ -1491,7 +1492,7 @@
 
         @media (max-width: 960px) {
             .stats-grid { grid-template-columns: 1fr 1fr; }
-            .calc-grid { grid-template-columns: 1fr; }
+            .calc-grid { grid-template-columns: minmax(0, 1fr); }
         }
 
         @media (max-width: 760px) {
@@ -1559,6 +1560,16 @@
             .book-actions { opacity: 1; }
             .scan-tab { padding: 11px 4px; font-size: 12px; }
             .scan-frame { max-height: none; aspect-ratio: 3/4; }
+
+            /* Lignes de livres : actions sur leur propre rangée (évite le débordement) */
+            .book-list-item { flex-wrap: wrap; }
+            .book-list-info { flex: 1 1 auto; }
+            .book-list-actions {
+                flex-basis: 100%;
+                justify-content: flex-end;
+                flex-wrap: wrap;
+                margin-top: 4px;
+            }
         }
 
         @media (max-width: 400px) {
@@ -1892,31 +1903,31 @@
         .month-chart {
             display: flex;
             align-items: flex-end;
-            gap: 4px;
-            height: 110px;
-            margin-top: 8px;
+            gap: 5px;
+            margin-top: 12px;
         }
 
         .month-col {
-            flex: 1;
+            flex: 1 1 0;
+            min-width: 0;
+            height: 118px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
-            height: 100%;
             justify-content: flex-end;
+            gap: 4px;
         }
 
         .month-bar {
+            flex: 0 0 auto;
             width: 100%;
-            max-width: 26px;
+            max-width: 24px;
             background: var(--gold);
             border-radius: 4px 4px 0 0;
-            min-height: 3px;
             transition: height .3s;
         }
 
-        .month-bar.empty {
+        .month-bar.zero {
             background: var(--bg3);
         }
 
@@ -3209,13 +3220,16 @@
             set('months-total', `${finished.length} livre${finished.length > 1 ? 's' : ''} terminé${finished.length > 1 ? 's' : ''} en ${y}`);
 
             const chart = document.getElementById('month-chart');
-            chart.innerHTML = perMonth.map((n, i) => `
-        <div class="month-col">
+            const TRACK = 90; // hauteur max d'une barre, en px
+            chart.innerHTML = perMonth.map((n, i) => {
+                const h = n ? Math.max(6, Math.round(n / max * TRACK)) : 3;
+                return `
+        <div class="month-col" title="${MONTHS_FR[i]} : ${n} livre(s)">
           <div class="month-val">${n || ''}</div>
-          <div class="month-bar${n ? '' : ' empty'}" style="height:${n ? Math.max(6, Math.round(n / max * 100)) : 3}%"
-            title="${MONTHS_FR[i]} : ${n} livre(s)"></div>
+          <div class="month-bar${n ? '' : ' zero'}" style="height:${h}px"></div>
           <div class="month-lbl">${MONTHS_FR[i][0]}</div>
-        </div>`).join('');
+        </div>`;
+            }).join('');
 
             // Série de mois consécutifs avec au moins une lecture, jusqu'au mois courant
             const streak = document.getElementById('streak-info');
