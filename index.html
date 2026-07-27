@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#1a1208">
+    <meta name="theme-color" content="#2c2a63">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -18,61 +18,219 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <style>
         :root {
-            --ink: #1a1208;
-            --ink2: #4a3f2f;
-            --ink3: #8a7a65;
-            --bg: #faf7f2;
-            --bg2: #f3ede3;
-            --bg3: #ede4d6;
-            --cream: #f8f4ee;
-            --gold: #c9973a;
-            --gold2: #e8c06a;
-            --read: #2d6a4f;
-            --read-bg: #e8f5ee;
-            --pal: #7b4f9e;
-            --pal-bg: #f2eaf9;
-            --wish: #c0392b;
-            --wish-bg: #fdecea;
-            --border: rgba(90, 70, 40, 0.12);
-            --shadow: 0 2px 20px rgba(90, 60, 20, 0.10);
-            --shadow-lg: 0 8px 40px rgba(90, 60, 20, 0.15);
+            --ink: #2c2a63;
+            --ink2: #514e77;
+            --ink3: #8b88a6;
+            --bg: #faf8f4;
+            --bg2: #f2eee7;
+            --bg3: #e8e2d6;
+            --cream: #fbf9f4;
+            --gold: #e78d90;
+            --gold2: #efa8a6;
+            --read: #2a7050;
+            --read-bg: #e6f2ea;
+            --pal: #7854a8;
+            --pal-bg: #efeaf8;
+            --wish: #bc3a52;
+            --wish-bg: #fbe9ec;
+            --border: rgba(70, 60, 120, 0.14);
+            --shadow: 0 2px 20px rgba(45, 40, 90, 0.10);
+            --shadow-lg: 0 8px 40px rgba(45, 40, 90, 0.16);
             --r: 12px;
         }
 
         html[data-theme="dark"] {
-            --ink: #ece3d4;
-            --ink2: #c3b7a2;
-            --ink3: #8f8471;
-            --bg: #14110c;
-            --bg2: #1e1a13;
-            --bg3: #2a241a;
-            --cream: #1b1710;
-            --gold: #d9a94a;
-            --gold2: #eac578;
-            --read: #56b98a;
-            --read-bg: #123026;
-            --pal: #b48ad6;
-            --pal-bg: #29203a;
-            --wish: #e57368;
-            --wish-bg: #3a2020;
-            --reading: #5a9bf0;
-            --reading-bg: #16233a;
-            --border: rgba(230, 210, 170, 0.14);
-            --shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --ink: #f4e9ec;
+            --ink2: #cdb8c0;
+            --ink3: #9d8891;
+            --bg: #171016;
+            --bg2: #221822;
+            --bg3: #32232f;
+            --cream: #1e151e;
+            --gold: #f0a0a2;
+            --gold2: #f5b6b7;
+            --read: #5fc49a;
+            --read-bg: #16332b;
+            --pal: #c49ae0;
+            --pal-bg: #2a1e3a;
+            --wish: #f2879c;
+            --wish-bg: #3c212c;
+            --reading: #8f95ea;
+            --reading-bg: #232149;
+            --border: rgba(240, 220, 228, 0.14);
+            --shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.55);
         }
 
         html[data-theme="dark"] body {
             background: var(--bg);
         }
 
+        /* ── Écran de démarrage (splash) ── */
+        #splash {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: radial-gradient(circle at 50% 42%, #fdfbf7, #f5efe6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity .45s ease;
+        }
+
+        #splash.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .splash-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            animation: splashIn .5s ease both;
+        }
+
+        .splash-logo {
+            width: 118px;
+            height: 118px;
+            border-radius: 27px;
+            box-shadow: 0 14px 40px rgba(44, 42, 99, .28);
+            background: #37377f;
+        }
+
+        .splash-logo-fallback {
+            width: 118px;
+            height: 118px;
+            border-radius: 27px;
+            background: #37377f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 62px;
+            box-shadow: 0 14px 40px rgba(44, 42, 99, .28);
+        }
+
+        .splash-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            font-weight: 700;
+            color: #2c2a63;
+            margin-top: 18px;
+        }
+
+        .splash-tag {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            color: #e0846c;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        @keyframes splashIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
         /* — Éléments « chrome » qui doivent rester sombres (ils utilisent var(--ink),
            qui s'éclaircit en mode sombre : on fige un fond sombre dédié) — */
-        html[data-theme="dark"] .sidebar,
-        html[data-theme="dark"] .mobile-nav,
+        /* ── MODE SOMBRE : barre latérale & navigation (prune rosé, textes clairs) ── */
+        html[data-theme="dark"] .sidebar {
+            background: linear-gradient(180deg, #4a2330, #351824);
+            color: #f7dfe3;
+        }
+
+        html[data-theme="dark"] .sidebar-logo {
+            border-bottom-color: rgba(255, 214, 220, 0.16);
+        }
+
+        html[data-theme="dark"] .sidebar-logo h1,
+        html[data-theme="dark"] .stat-mini-val,
+        html[data-theme="dark"] .stat-chip-val {
+            color: #ffeff1;
+        }
+
+        html[data-theme="dark"] .sidebar-logo span,
+        html[data-theme="dark"] .nav-section-label,
+        html[data-theme="dark"] .stat-mini-label,
+        html[data-theme="dark"] .stat-chip-label,
+        html[data-theme="dark"] .save-state {
+            color: rgba(255, 226, 231, 0.75);
+        }
+
+        html[data-theme="dark"] .nav-item {
+            color: #f3d2d8;
+        }
+
+        html[data-theme="dark"] .nav-item:hover {
+            background: rgba(255, 255, 255, 0.10);
+            color: #fff;
+        }
+
+        html[data-theme="dark"] .nav-item.active {
+            background: #b85462;
+            color: #fff;
+        }
+
+        html[data-theme="dark"] .nav-item .badge {
+            background: rgba(255, 255, 255, 0.14);
+            color: #f3d2d8;
+        }
+
+        html[data-theme="dark"] .nav-item.active .badge {
+            background: rgba(255, 255, 255, 0.9);
+            color: #a03e4b;
+        }
+
+        html[data-theme="dark"] .sidebar-stats {
+            border-top-color: rgba(255, 214, 220, 0.16);
+        }
+
+        html[data-theme="dark"] .stat-chip {
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        html[data-theme="dark"] .side-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 214, 220, 0.2);
+            color: #f7dfe3;
+        }
+
+        html[data-theme="dark"] .side-btn:hover {
+            background: #f7dfe3;
+            border-color: #f7dfe3;
+            color: #7d2a38;
+        }
+
+        html[data-theme="dark"] .mobile-nav {
+            background: linear-gradient(180deg, #4a2330, #351824);
+            border-top-color: rgba(255, 214, 220, 0.14);
+        }
+
+        html[data-theme="dark"] .mnav-item {
+            color: rgba(247, 223, 227, 0.75);
+        }
+
+        html[data-theme="dark"] .mnav-item.active {
+            color: #ffffff;
+        }
+
+        html[data-theme="dark"] .mnav-badge {
+            background: #b85462;
+            color: #fff;
+        }
+
         html[data-theme="dark"] .tools-menu-panel,
         html[data-theme="dark"] .toast {
-            background: #0f0c07;
+            background: #291a26;
         }
 
         /* — Couvertures de secours : fonds sombres teintés + titre clair lisible — */
@@ -81,19 +239,19 @@
         }
 
         html[data-theme="dark"] .cover-fallback.fb-read {
-            background: linear-gradient(135deg, #16281f, #1d3529) !important;
+            background: linear-gradient(135deg, #163026, #1e3d30) !important;
         }
 
         html[data-theme="dark"] .cover-fallback.fb-reading {
-            background: linear-gradient(135deg, #15202f, #1c2c42) !important;
+            background: linear-gradient(135deg, #1b2247, #24306a) !important;
         }
 
         html[data-theme="dark"] .cover-fallback.fb-pal {
-            background: linear-gradient(135deg, #221a30, #2d2242) !important;
+            background: linear-gradient(135deg, #241d40, #322a58) !important;
         }
 
         html[data-theme="dark"] .cover-fallback.fb-wish {
-            background: linear-gradient(135deg, #2b1a1a, #3b2222) !important;
+            background: linear-gradient(135deg, #351d2b, #48283a) !important;
         }
 
         html[data-theme="dark"] .cover-fallback .fb-title {
@@ -146,8 +304,8 @@
 
         .sidebar {
             width: 230px;
-            background: var(--ink);
-            color: #e8dece;
+            background: linear-gradient(180deg, #efa2a6, #e78a90);
+            color: #5e1f28;
             display: flex;
             flex-direction: column;
             padding: 0;
@@ -159,20 +317,20 @@
 
         .sidebar-logo {
             padding: 28px 24px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(94, 31, 40, 0.16);
         }
 
         .sidebar-logo h1 {
             font-family: 'Playfair Display', serif;
             font-size: 20px;
             font-weight: 700;
-            color: #fff;
+            color: #5e1f28;
             line-height: 1.2;
         }
 
         .sidebar-logo span {
             font-size: 11px;
-            color: var(--ink3);
+            color: rgba(94, 31, 40, 0.82);
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
@@ -186,7 +344,7 @@
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            color: var(--ink3);
+            color: rgba(94, 31, 40, 0.82);
             padding: 12px 12px 6px;
         }
 
@@ -198,21 +356,21 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.15s;
-            color: #c8baa8;
+            color: #5e1f28;
             font-size: 13.5px;
             font-weight: 400;
             margin-bottom: 2px;
         }
 
         .nav-item:hover {
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
+            background: rgba(255, 255, 255, 0.42);
+            color: #5e1f28;
         }
 
         .nav-item.active {
-            background: var(--gold);
-            color: var(--ink);
-            font-weight: 500;
+            background: #bd505e;
+            color: #fff;
+            font-weight: 600;
         }
 
         .nav-item .icon {
@@ -223,8 +381,8 @@
 
         .nav-item .badge {
             margin-left: auto;
-            background: rgba(255, 255, 255, 0.12);
-            color: #c8baa8;
+            background: rgba(94, 31, 40, 0.14);
+            color: #5e1f28;
             font-size: 11px;
             padding: 1px 7px;
             border-radius: 20px;
@@ -233,13 +391,13 @@
         }
 
         .nav-item.active .badge {
-            background: rgba(0, 0, 0, 0.15);
-            color: var(--ink);
+            background: rgba(255, 255, 255, 0.88);
+            color: #bd505e;
         }
 
         .sidebar-stats {
             padding: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(94, 31, 40, 0.16);
         }
 
         .stat-mini {
@@ -249,13 +407,13 @@
         .stat-mini-val {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
-            color: var(--gold2);
+            color: #5e1f28;
             font-weight: 700;
         }
 
         .stat-mini-label {
             font-size: 10px;
-            color: var(--ink3);
+            color: rgba(94, 31, 40, 0.82);
             text-transform: uppercase;
             letter-spacing: 0.08em;
         }
@@ -268,7 +426,7 @@
 
         .stat-chip {
             flex: 1;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(94, 31, 40, 0.09);
             border-radius: 8px;
             padding: 8px 6px;
             text-align: center;
@@ -277,12 +435,12 @@
         .stat-chip-val {
             font-size: 16px;
             font-weight: 600;
-            color: #e8dece;
+            color: #5e1f28;
         }
 
         .stat-chip-label {
             font-size: 9px;
-            color: var(--ink3);
+            color: rgba(94, 31, 40, 0.82);
             text-transform: uppercase;
             letter-spacing: 0.06em;
             margin-top: 2px;
@@ -365,7 +523,7 @@
 
         .btn-primary {
             background: var(--gold);
-            color: var(--ink);
+            color: #2c2450;
         }
 
         .btn-primary:hover {
@@ -1124,8 +1282,8 @@
         }
         /* ════════ AJOUTS v2 ════════ */
         :root {
-            --reading: #1f6feb;
-            --reading-bg: #e7f0fe;
+            --reading: #4356b0;
+            --reading-bg: #e8eaf8;
         }
 
         /* — Couvertures réelles — */
@@ -1245,22 +1403,22 @@
             text-align: left;
             padding: 8px 12px;
             border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, .12);
-            background: rgba(255, 255, 255, .04);
-            color: #e8dece;
+            border: 1px solid rgba(94, 31, 40, .22);
+            background: rgba(255, 255, 255, .32);
+            color: #5e1f28;
             cursor: pointer;
             transition: all .15s;
         }
 
         .side-btn:hover {
-            background: var(--gold);
-            color: var(--ink);
-            border-color: var(--gold);
+            background: #fff;
+            color: #b04a52;
+            border-color: #fff;
         }
 
         .save-state {
             font-size: 10px;
-            color: var(--ink3);
+            color: rgba(94, 31, 40, 0.8);
             padding: 4px 12px 0;
             letter-spacing: .04em;
         }
@@ -1586,8 +1744,8 @@
                 left: 0;
                 right: 0;
                 z-index: 40;
-                background: var(--ink);
-                border-top: 1px solid rgba(255,255,255,.08);
+                background: linear-gradient(180deg, #eea0a5, #e78a90);
+                border-top: 1px solid rgba(94,31,40,.16);
                 padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
                 box-shadow: 0 -4px 20px rgba(0,0,0,.12);
             }
@@ -1602,11 +1760,11 @@
                 gap: 2px;
                 padding: 6px 2px;
                 border-radius: 10px;
-                color: #b8a888;
+                color: rgba(94, 31, 40, 0.8);
                 position: relative;
                 transition: color .15s;
             }
-            .mnav-item.active { color: var(--gold2); }
+            .mnav-item.active { color: #5e1f28; }
             .mnav-ico { font-size: 19px; line-height: 1; }
             .mnav-lbl { font-size: 10px; letter-spacing: .01em; }
             .mnav-badge {
@@ -1618,8 +1776,8 @@
                 height: 15px;
                 padding: 0 4px;
                 border-radius: 8px;
-                background: var(--gold);
-                color: var(--ink);
+                background: #bd505e;
+                color: #fff;
                 font-size: 9px;
                 font-weight: 700;
                 display: none;
@@ -1964,6 +2122,16 @@
 </head>
 
 <body>
+
+    <!-- ÉCRAN DE DÉMARRAGE (splash) -->
+    <div id="splash" aria-hidden="true">
+        <div class="splash-inner">
+            <img src="icons/icon-192.png" alt="" class="splash-logo" width="118" height="118"
+                onerror="this.outerHTML='<div class=&quot;splash-logo-fallback&quot;>📖</div>'">
+            <div class="splash-name">Biblio-ninoush</div>
+            <div class="splash-tag">Ma bibliothèque</div>
+        </div>
+    </div>
 
     <div class="layout">
 
@@ -2877,10 +3045,10 @@
         }
 
         const COVER_COLORS = {
-            read: 'linear-gradient(135deg,#e8f5ee,#c8ecd8)',
-            reading: 'linear-gradient(135deg,#e7f0fe,#c9dcfb)',
-            pal: 'linear-gradient(135deg,#f2eaf9,#ddd0f5)',
-            wish: 'linear-gradient(135deg,#fdecea,#f5c8c0)',
+            read: 'linear-gradient(135deg,#e8f3ec,#cfe9db)',
+            reading: 'linear-gradient(135deg,#e8eaf8,#d0d6f3)',
+            pal: 'linear-gradient(135deg,#efeaf8,#ddd0f2)',
+            wish: 'linear-gradient(135deg,#fbe9ec,#f6ccd5)',
         };
 
         // ── RENDU ─────────────────────────────────────────────────────────────────
@@ -3837,7 +4005,7 @@
             const dark = theme === 'dark';
             document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
             const meta = document.querySelector('meta[name="theme-color"]');
-            if (meta) meta.setAttribute('content', dark ? '#14110c' : '#1a1208');
+            if (meta) meta.setAttribute('content', dark ? '#171016' : '#2c2a63');
             document.querySelectorAll('.theme-btn').forEach(b => {
                 b.textContent = dark ? '☀️ Mode clair' : '🌙 Mode sombre';
             });
@@ -4301,7 +4469,21 @@
             await loadBooks();
             renderAll();
             markSaved();
+            hideSplash();
         })();
+
+        // Masque l'écran de démarrage une fois l'appli prête (min. 600 ms pour éviter un flash)
+        function hideSplash() {
+            const sp = document.getElementById('splash');
+            if (!sp) return;
+            const show = () => { sp.classList.add('hide'); setTimeout(() => sp.remove(), 500); };
+            setTimeout(show, 600);
+        }
+        // Filet de sécurité : masque le splash même si l'init échoue
+        window.addEventListener('load', () => setTimeout(() => {
+            const sp = document.getElementById('splash');
+            if (sp && !sp.classList.contains('hide')) { sp.classList.add('hide'); setTimeout(() => sp.remove(), 500); }
+        }, 2500));
 
         // Filet de sécurité : on écrit avant toute fermeture / mise en arrière-plan
         window.addEventListener('beforeunload', saveLocal);

@@ -8,9 +8,13 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#faf7f2",
-  "theme_color": "#1a1208",
-  "categories": ["books", "lifestyle", "productivity"],
+  "background_color": "#f7f1e8",
+  "theme_color": "#2c2a63",
+  "categories": [
+    "books",
+    "lifestyle",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "icons/icon-192.png",
