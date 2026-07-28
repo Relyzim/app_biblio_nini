@@ -6,7 +6,7 @@
    Pense à incrémenter APP_VERSION à chaque mise à jour de l'appli.
    ══════════════════════════════════════════════════════════════════ */
 
-const APP_VERSION = 'v13.28';
+const APP_VERSION = 'v13.29';
 const SHELL_CACHE = 'biblio-shell-' + APP_VERSION;
 const COVER_CACHE = 'biblio-covers-' + APP_VERSION;
 
