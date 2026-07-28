@@ -326,6 +326,15 @@
             font-weight: 700;
             color: #5e1f28;
             line-height: 1.2;
+            display: flex;
+            align-items: center;
+            gap: 8px;  
+        }
+
+        .logo-img {                 /* ← nouvelle règle */
+            height: 28px;
+            width: auto;
+            border-radius: 6px;
         }
 
         .sidebar-logo span {
@@ -2138,7 +2147,7 @@
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar-logo">
-                <h1>📚 Bookaru</h1>
+                <h1><img src="icons/icon-192.png" alt="Bookaru" class="logo-img"> Bookaru</h1>
                 <span>Ma bibliothèque</span>
             </div>
             <nav class="sidebar-nav">
