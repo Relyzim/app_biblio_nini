@@ -1175,6 +1175,13 @@
             flex-shrink: 0;
         }
 
+        .icon-img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            vertical-align: middle;
+        }
+
         .icon-btn {
             width: 32px;
             height: 32px;
@@ -2153,7 +2160,7 @@
             <nav class="sidebar-nav">
                 <div class="nav-section-label">Navigation</div>
                 <div class="nav-item active" onclick="switchTab('all')">
-                    <span class="icon">🏠</span> Tous les livres
+                    <span class="icon"><img src="icons/Tous les livres.png" alt="" class="icon-img"></span> Tous les livres
                     <span class="badge" id="badge-all">0</span>
                 </div>
                 <div class="nav-item" onclick="switchTab('reading')">
@@ -2474,7 +2481,7 @@
         <!-- NAVIGATION BASSE (mobile) -->
         <nav class="mobile-nav" id="mobile-nav">
             <button class="mnav-item active" data-tab="all" onclick="switchTab('all')">
-                <span class="mnav-ico"><img src="tous les livres.png" alt="" class="mnav-img"></span><span class="mnav-lbl">Tous</span>
+                <span class="mnav-ico">🏠</span><span class="mnav-lbl">Tous</span></button>
             <button class="mnav-item" data-tab="reading" onclick="switchTab('reading')">
                 <span class="mnav-ico">📖</span><span class="mnav-lbl">En cours</span>
                 <span class="mnav-badge" id="mnav-badge-reading"></span></button>
