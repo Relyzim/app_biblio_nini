@@ -1690,6 +1690,7 @@
             .topbar {
                 flex-wrap: wrap;
                 padding: 12px 16px;
+                padding-top: calc(12px + env(safe-area-inset-top));   /* ← ligne ajoutée */
                 gap: 10px;
                 row-gap: 10px;
             }
