@@ -6,7 +6,7 @@
    Pense à incrémenter APP_VERSION à chaque mise à jour de l'appli.
    ══════════════════════════════════════════════════════════════════ */
 
-const APP_VERSION = 'v1.01';
+const APP_VERSION = 'v1.02';
 const SHELL_CACHE = 'biblio-shell-' + APP_VERSION;
 const COVER_CACHE = 'biblio-covers-' + APP_VERSION;
 
@@ -14,6 +14,8 @@ const COVER_CACHE = 'biblio-covers-' + APP_VERSION;
 const SHELL_ASSETS = [
   './',
   './index.html',
+  './style.css',
+  './app.js',
   './manifest.json',
   './icons/icon-192.png',
   './icons/icon-512.png',
@@ -97,7 +99,7 @@ function cacheFirstCover(req) {
       return fetch(req).then(res => {
         // on ne met en cache que les vraies images valides
         if (res && res.ok && (res.type === 'basic' || res.type === 'cors' || res.type === 'opaque')) {
-          cache.put(req, res.clone()).catch(() => {});
+          cache.put(req, res.clone()).catch(() => { });
         }
         return res;
       }).catch(() => hit || Response.error());
@@ -109,7 +111,7 @@ function fetchAndStore(req, cacheName) {
   return fetch(req).then(res => {
     if (res && res.ok) {
       const copy = res.clone();
-      caches.open(cacheName).then(c => c.put(req, copy)).catch(() => {});
+      caches.open(cacheName).then(c => c.put(req, copy)).catch(() => { });
     }
     return res;
   }).catch(() => caches.match(req));
