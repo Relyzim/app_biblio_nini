@@ -56,4 +56,4 @@ et le scan (qui interrogent internet) nécessitent une connexion.
 
 Si vous modifiez `index.html`, ouvrez `sw.js` et changez la ligne
 `const APP_VERSION = 'v1';` en `'v2'`, etc. Cela force les téléphones à
-récupérer la nouvelle version au lieu de servir l'ancienne depuis le cache.
+récupérer la nouvelle version au lieu de servir l'ancienne depuis le cache
